@@ -1,0 +1,9 @@
+[X] Implement search bar
+[X]  Implement custom name + date submit button
+[X]  Implement CSS for styling everything
+
+> Bug Fixes
+[] Need to fix issue where the dates don't self remove even when it's over the expiry date
+[] Need to fix issue with persistence
+[] Need to move event listener tothe root as event listeners must be registered synchronously,
+   check the provided github sample code and copy what it does :/

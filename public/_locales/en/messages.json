@@ -1,0 +1,10 @@
+{
+  "extensionDescription": {
+    "description": "Website Manager",
+    "message": "Chrome extension to help manage your time on the web"
+  },
+  "extensionName": {
+    "description": "Nomad",
+    "message": "Chrome extension website manager"
+  }
+}
