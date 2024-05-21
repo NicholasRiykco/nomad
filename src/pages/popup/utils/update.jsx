@@ -8,7 +8,7 @@ const getUrlAndBlock = async (entries) =>{
 
 
 const updateRules = async (blockUrls) => {
-    console.log("Updating rules");
+    console.log("Updating rules", blockUrls);
     let id = 1;
     const oldRules = await chrome.declarativeNetRequest.getDynamicRules();
     const oldRuleIds = oldRules.map(rule => rule.id);

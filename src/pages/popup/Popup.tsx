@@ -8,9 +8,17 @@ import withErrorBoundary from '@src/shared/hoc/withErrorBoundary';
 import Entry from './components/Entry'
 import {saveWebsiteEntry, getWebsiteEntries, removeEntries, removeEntryFromStorage, checkIfExist} from './utils/storageLogic'
 import {getUrlAndBlock, updateRules} from './utils/update';
-import {createAlarm} from './utils/alarmsLogic'
+import {createAlarm,removeAlarm} from '../background/alarms.js'
+
 
 const Popup = () => {
+
+  chrome.storage.onChanged.addListener(async(changes, namespace) => {
+    const entries = await getWebsiteEntries();
+    setEntries(entries);
+    console.log("Updated Display")
+  });
+
   const [entries, setEntries] = useState([]);
   const [newSearch, setNewSearch] = useState('')
   const [newName, setNewName] = useState('')
@@ -56,6 +64,7 @@ const Popup = () => {
     console.log("removeEntry",newEntries)
     await removeEntryFromStorage(newEntries);
     await fetchWebsiteEntries();
+    await removeAlarm(toDeleteEntry);
   }
 
   const handleSearchChange = (event)=>{
@@ -100,7 +109,7 @@ const Popup = () => {
     // Fetch website entries to update the popup
     await fetchWebsiteEntries(); 
 
-    await createAlarm(entry, handleAlarm)
+    await createAlarm(entry)
 
     setNewName('');
     setDatetime('');
